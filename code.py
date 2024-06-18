@@ -1,3 +1,16 @@
+"""
+Daily-to-Hourly-Rainfall-Processor
+Version: 1.0
+Date: 2024-06-18
+
+Author: Dhiego da Silva Sales
+Affiliation: Instituto Federal Fluminense
+Degree: Master in Environmental Engineering
+
+Description:
+This Python script processes a CSV file containing daily rainfall data and converts it into hourly rainfall data.
+"""
+
 import csv
 from datetime import datetime, timedelta
 
@@ -14,8 +27,11 @@ def process_csv(input_file, output_file):
         data = list(reader)
 
     num_columns = len(data[0])  # Number of columns in the input file
-
     output_data = []
+
+    header = data[0]  # Extract header
+    data = data[1:]   # Skip header
+
     for row in data:
         date = row[0]  # Get the date from the first column
         for hour in range(24):  # Iterate through each hour of the day
@@ -33,6 +49,11 @@ def process_csv(input_file, output_file):
     # Write the processed data to the output file
     with open(output_file, 'w', newline='') as outfile:
         writer = csv.writer(outfile, delimiter=';')
+        
+        # Write the header to the output file
+        hourly_header = [f"{col}_hourly" for col in header]
+        writer.writerow(hourly_header)
+
         writer.writerows(output_data)
 
     print(f'Output file "{output_file}" successfully generated.')

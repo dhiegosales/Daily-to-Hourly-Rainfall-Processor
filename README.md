@@ -1,98 +1,74 @@
-# Daily-to-Hourly-Rainfall-Processor
+# Daily2HourRain: Daily to Hourly Rainfall Processor
 
-This Python script processes a CSV file containing daily rainfall data and converts it into hourly rainfall data.
+Welcome to the **Daily2HourRain** Python program! This tool processes a CSV file containing daily rainfall data and converts it into hourly rainfall data by linearly estimating hourly values from the daily data.
 
-## How It Works
+## Table of Contents
 
-1. **Date Conversion:** The script converts dates from the format `dd/mm/yyyy` to `dd/mm/yyyy hh:min` for each hour of the day (00:00 to 23:00).
-2. **Rainfall Distribution:** The script distributes the daily rainfall value evenly across 24 hours to generate hourly rainfall data. This is achieved by dividing the daily rainfall value by 24.
-3. **CSV Processing:** The processed data is written to a new CSV file.
+- [Overview](#overview)
+- [Input Requirements](#input-requirements)
+- [Output](#output)
+- [Executable for Windows](#executable-for-windows)
+- [Usage](#usage)
+- [Example File](#example-file)
+- [Author](#author)
+- [Contact](#contact)
 
-## Input File Format
+## Overview
 
-The input CSV file should have the following format:
-- The first row should contain headers.
-- The first column contains dates in the format `dd/mm/yyyy`.
-- The subsequent columns contain daily rainfall values.
+**Daily2HourRain** is a Python program designed to convert daily precipitation data into hourly estimates. It achieves this by dividing the daily precipitation value by 24, thereby providing hourly estimates throughout the day.
 
-### Example Input (`input_data.csv`)
+## Input Requirements
 
-| date       | rainfall1 | rainfall2 |
-|------------|-----------|-----------|
-| 01/01/2024 | 12.0      | 15.5      |
-| 02/01/2024 | 8.0       | 10.0      |
+- **Input File**: The program requires a CSV file named `daily_rainfall.csv` as input.
+- **Format**: The input CSV file should be structured with data separated by semicolons (`;`):
 
-## Output File Format
+Date;Station1;Station2;Station3;...
+dd/mm/yyyy;float;float;float;..
 
-The output CSV file will have the following format:
-- The first row will contain headers indicating hourly data.
-- The first column contains dates and times in the format `dd/mm/yyyy hh:min`.
-- The subsequent columns contain hourly rainfall values.
 
-### Example Output (`output_data.csv`)
+- **Date**: The first column must contain dates in the format `dd/mm/yyyy`.
+- **Station Columns**: Subsequent columns should contain numeric values representing daily rainfall data for each station.
 
-#### 01/01/2024
+## Output
 
-| date_time          | rainfall1_hourly | rainfall2_hourly |
-|--------------------|------------------|------------------|
-| 01/01/2024 00:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 01:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 02:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 03:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 04:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 05:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 06:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 07:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 08:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 09:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 10:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 11:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 12:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 13:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 14:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 15:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 16:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 17:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 18:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 19:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 20:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 21:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 22:00   | 0.5              | 0.6458333333333334 |
-| 01/01/2024 23:00   | 0.5              | 0.6458333333333334 |
-| 02/01/2024 00:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 01:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 02:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 03:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 04:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 05:00   | 0.3333333333333333 | 0.4166666666666667 |
-| 02/01/2024 06:00   | 0.3333333333333333 | 0.4166666666666667 |
-| ...                | ...              | ...              |
+- **Output File**: Upon successful processing, the program generates an output CSV file named `hourly_rainfall.csv`.
+- **Format**: The output file will have the following structure:
 
-Each daily rainfall value is evenly distributed across 24 hours to calculate hourly values.
+Date_hourly;Station1_hourly;Station2_hourly;Station3_hourly;...
+dd/mm/yyyy hh;float;float;float;..
 
-## How to Use
 
-1. Ensure you have Python installed on your system.
-2. Place your input CSV file in the same directory as the script.
-3. Run the script using the following command:
+- **Date_hourly**: Each row corresponds to hourly data derived from the daily data provided in the input file.
 
-```bash
-python process_csv.py
-The script will read the input CSV file input_data.csv and generate the output CSV file output_data.csv.
-```
+## Executable for Windows
 
-## Functions
+- **Executable**: You can download a pre-built executable for Windows 64-bit from the repository.
+- **Usage**: Ensure the executable (`Daily2HourRain.exe`) is placed in the same directory as your `daily_rainfall.csv` input file.
 
-### `convert_date(date_str, hour)`
+## Usage
 
-Converts a date from `dd/mm/yyyy` format to `dd/mm/yyyy hh:min` format for a given hour.
+1. **Download**: Download the repository including the executable (`Daily2HourRain.exe`) and the `daily_rainfall.csv` input file.
 
-- `date_str` (str): The date string in `dd/mm/yyyy` format.
-- `hour` (int): The hour to be set in the converted date.
+2. **Execution**: Double-click on `Daily2HourRain.exe` to run the program.
 
-### `process_csv(input_file, output_file)`
+3. **Output**: The program will automatically process the `daily_rainfall.csv` file and generate `hourly_rainfall.csv` in the same directory.
 
-Processes the input CSV file, converting daily rainfall data to hourly rainfall data, and writes the output to a new CSV file.
+## Example File
 
-- `input_file` (str): The path to the input CSV file.
-- `output_file` (str): The path to the output CSV file.
+- **Example**: An example `daily_rainfall.csv` file will be provided alongside as a sample.
+
+### Example `daily_rainfall.csv`
+
+| Date       | Station1 | Station2 | Station3 |
+|------------|----------|----------|----------|
+| 01/01/2024 | 10.5     | 5.2      | 8.3      |
+| 02/01/2024 | 7.8      | 3.0      | 6.5      |
+| 03/01/2024 | 9.2      | 4.5      | 7.1      |
+
+## Author
+
+- **Dhiego da Silva Sales**
+- **Affiliation**: Instituto Federal Fluminense
+- **Contact**: dhiego.sales@outlook.com
+
+

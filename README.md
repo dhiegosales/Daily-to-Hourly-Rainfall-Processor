@@ -59,17 +59,13 @@ dd/mm/yyyy hh;float;float;float;..
 
 - **Example (input)**: An example `daily_rainfall.csv` file will be provided alongside as a sample.
 
-`daily_rainfall.csv`
-
 |Date        | Station1 | Station2 | Station3 | ... |
 |-------------|----------|----------|----------|----|
 | 01/06/2024  | 10       | 15       | 8        |... |
 | 02/06/2024  | 5        | 12       | 6        |... |
 | ...         | ...      | ...      | ...      |... |
 
-- **Example (output)**: An example `hourly_rainfall.csv` output.
-
-`hourly_rainfall.csv`
+- **Example (output)**: An example `hourly_rainfall.csv`.
 
 | Date_hourly      | Station1_hourly | Station2_hourly | Station3_hourly |
 |------------------|-----------------|-----------------|-----------------|

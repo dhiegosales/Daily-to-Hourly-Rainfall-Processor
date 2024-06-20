@@ -55,11 +55,10 @@ dd/mm/yyyy hh;float;float;float;..
 
 3. **Output**: The program will automatically process the `daily_rainfall.csv` file and generate `hourly_rainfall.csv` in the same directory.
 
-## Example File
+## Example Files
 
-- **Example**: An example `daily_rainfall.csv` file will be provided alongside as a sample.
+- **Example (input)**: An example `daily_rainfall.csv` file will be provided alongside as a sample.
 
-### Example 
 `daily_rainfall.csv`
 
 |Date        | Station1 | Station2 | Station3 | ... |
@@ -67,6 +66,8 @@ dd/mm/yyyy hh;float;float;float;..
 | 01/06/2024  | 10       | 15       | 8        |... |
 | 02/06/2024  | 5        | 12       | 6        |... |
 | ...         | ...      | ...      | ...      |... |
+
+- **Example (output)**: An example `hourly_rainfall.csv` output.
 
 `hourly_rainfall.csv`
 

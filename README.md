@@ -23,6 +23,7 @@ Welcome to the **Daily2HourRain** Python program! This tool processes a CSV file
 - **Format**: The input CSV file should be structured with data separated by semicolons (`;`):
 
 Date;Station1;Station2;Station3;...
+
 dd/mm/yyyy;float;float;float;..
 
 
@@ -35,6 +36,7 @@ dd/mm/yyyy;float;float;float;..
 - **Format**: The output file will have the following structure:
 
 Date_hourly;Station1_hourly;Station2_hourly;Station3_hourly;...
+
 dd/mm/yyyy hh;float;float;float;..
 
 
